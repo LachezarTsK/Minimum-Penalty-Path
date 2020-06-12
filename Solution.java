@@ -35,7 +35,7 @@ public class Solution {
 
   /**
    * Searches for the bits that are essentail to reach the goal by consequtively
-   * excluding each bit from position 9 to position 1, i.e. edges with leftmost bit 
+   * excluding each bit from position 9 to position 0, i.e. edges with leftmost bit 
    * of the penalty value at these positions.
    *
    * Since the minimum penalty is calculated by applying the bitwise 'OR' for the value of the edges,
@@ -44,13 +44,16 @@ public class Solution {
    *
    * Example:
    * There is no path from start to goal when excluding edges with leftmost bits in 
-   * the binary representation at the following positions: 
-   * 1 (binary: 1, decimal value: 1) 
-   * 4 (binary: 1000, decimal value: 8) 
-   * 6 (binary: 100000, decimal value: 32)
+   * the binary representation, as follows: 
+   * position 0 (binary: 1, decimal value: 1) 
+   * position 4 (binary: 1000, decimal value: 8) 
+   * position 6 (binary: 100000, decimal value: 32)
    *
    * Therefore, the minimum penalty path will include only the value of these bits that are
    * essential to reach the goal from the start, namely: 1 + 8 + 32 = 41.
+   * Since at this stage, we have only unique bits with value of '1', 
+   * applying the bitwise 'OR' operation is equivalent to applying
+   * the arithmetic sum to their decimal values.
    *
    * @return A non-negative integer, representing the minimum penalty, 
    *         if the goal is reachable. Otherwise, it returns '-1'.
