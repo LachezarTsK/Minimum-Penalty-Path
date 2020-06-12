@@ -1,12 +1,9 @@
 package JavaJava.minPenaltyPath.streamlined;
 
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Set;
-import java.util.HashSet;
 
 public class Solution {
   private static final int MAX_PENALTY = 1023;
@@ -39,25 +36,30 @@ public class Solution {
   }
 
   /**
-   * Searches for the bits that are essentail for reaching the goal from the start by consequtively
-   * excluding еach bit from position 9 to to position 1.
+   * Searches for the bits that are essentail to reach the goal by consequtively
+   * excluding each bit from position 9 to position 1, i.e. edges with leftmost bit 
+   * of the penalty value at these positions.
    *
-   * <p>Since the minimum penalty is calculated by applying the bitwise 'OR' for the value of edges,
+   * Since the minimum penalty is calculated by applying the bitwise 'OR' for the value of the edges,
    * if by excluding edges with a certain bit there is no path from start to goal, this bit has to
    * be included in the final result.
    *
-   * <p>Example: There is no path from start to goal when excluding edges with leftmost bits in the
-   * binary representation at the following positions: 1 (binary: 1, decimal value: 1) 4 (binary:
-   * 1000, decimal value: 8) 6 (binary: 100000, decimal value: 32)
+   * Example:
+   * There is no path from start to goal when excluding edges with leftmost bits in 
+   * the binary representation at the following positions: 
+   * 1 (binary: 1, decimal value: 1) 
+   * 4 (binary: 1000, decimal value: 8) 
+   * 6 (binary: 100000, decimal value: 32)
    *
-   * <p>Therefore, the minimum penalty path will include only the value of these bits that are
+   * Therefore, the minimum penalty path will include only the value of these bits that are
    * essential to reach the goal from the start, namely: 1 + 8 + 32 = 41.
    *
-   * @return A non-negative integer, representing the minimum penalty, if the goal is reachable.
-   *     Otherwise, it returns '-1'.
+   * @return A non-negative integer, representing the minimum penalty, 
+   *         if the goal is reachable. Otherwise, it returns '-1'.
    */
   private static int searchForPath_forEachBit(int start, int goal) {
-    // check if goal is reachable without excluding any bits.
+    
+    // Checks if the goal is reachable without excluding any bits.
     if (breadthFirstSearch(start, goal, MAX_PENALTY + 1) == false) {
       return -1;
     }
@@ -121,15 +123,13 @@ public class Solution {
    * the edges with the current leftmost bit do not influence the search through the edges with
    * leftmost bits that is less than the current leftmost bit.
    *
-   * <p>Example:
+   * Example:
+   * 1. There is no path from start to goal when excluding edges with leftmost bit at position 4
+   *    (binary: 1000, decimal value: 8). Therefore, this bit is essential for the path from start to goal.
    *
-   * <p>1. There is no path from start to goal when excluding edges with leftmost bit at position 4
-   * (binary representation: 1000, decimal value: 8). Therefore, this bit is essential for the path
-   * from start to goal.
-   *
-   * <p>2. We subtract the decimal value of 8 from all edges with leftmost bit at position 4 Thus,
-   * edges with penalty value of 8, 9, 10, 11, 12, 13, 14, 15 become edges with penalty value of 0,
-   * 1, 2, 3, 4, 5, 6, 7.
+   * 2. We subtract the decimal value of 8 from all edges with leftmost bit at position 4.
+   *    Thus, edges with penalty value of 8, 9, 10, 11, 12, 13, 14, 15 
+   *    become edges with penalty value of 0, 1, 2, 3, 4, 5, 6, 7.
    */
   private static void updateGraph(int currentBit) {
 
@@ -145,12 +145,6 @@ public class Solution {
     }
   }
 
-  private static void print() {
-    for (int i = 1; i <= numberOfNodes; i++) {
-      System.out.println(nodesAndEdges[i]);
-    }
-  }
-
   static class Edge {
     int toNode;
     int penalty;
@@ -161,9 +155,9 @@ public class Solution {
     }
 
     /**
-     * Mutiple edges between two nodes are possible. To avoid going through edges between two of the
-     * same nodes that have also the same penalty value more than once, we override the 'equals
-     * method' so that such edges are not included more than once in the graph.
+     * Mutiple edges between two nodes are possible. To avoid going more than once through edges
+     * between two of the same nodes that have also the same penalty value, we override the 'equals'
+     * method so that such edges are not included more than once in the graph.
      */
     @Override
     public boolean equals(Object obj) {
