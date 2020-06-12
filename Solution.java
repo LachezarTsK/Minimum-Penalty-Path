@@ -109,6 +109,7 @@ public class Solution {
   @SuppressWarnings("unchecked")
   private static void initialize_nodesAndEdges() {
 
+    // Values at index '0' are not applied in the solution, so that each index corresponds to a node value.
     nodesAndEdges = new List[numberOfNodes + 1];
     for (int i = 1; i <= numberOfNodes; i++) {
       nodesAndEdges[i] = new ArrayList<Edge>();
