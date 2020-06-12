@@ -50,10 +50,9 @@ public class Solution {
    * position 6 (binary: 100000, decimal value: 32)
    *
    * Therefore, the minimum penalty path will include only the value of these bits that are
-   * essential to reach the goal from the start, namely: 1 + 8 + 32 = 41.
-   * Since at this stage, we have only unique bits with value of '1', 
-   * applying the bitwise 'OR' operation is equivalent to applying
-   * the arithmetic sum to their decimal values.
+   * essential to reach the goal from the start, namely: 1 + 8 + 32 = 41. Since at this stage, 
+   * we have only unique bits with value of '1', applying the bitwise 'OR' operation is equivalent 
+   * to applying the arithmetic sum to their decimal values.
    *
    * @return A non-negative integer, representing the minimum penalty, 
    *         if the goal is reachable. Otherwise, it returns '-1'.
