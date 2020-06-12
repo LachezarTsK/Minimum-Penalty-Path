@@ -69,6 +69,7 @@ public class Solution {
 
       int currentBit = (int) Math.pow(2, i);
       if (breadthFirstSearch(start, goal, currentBit) == false) {
+        // Yes, I know that it could also be written "minimumPenalty += currentBit" :))        
         minimumPenalty = minimumPenalty + currentBit;
         updateGraph(currentBit);
       }
